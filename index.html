@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Caractéristiques débroussailleuses Makita / Dolmar</title>
+    <title>Caractéristiques Makita / Dolmar</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -16,6 +16,9 @@
         }
         .header {
             padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
         .logo {
             max-width: 200px;
@@ -54,7 +57,7 @@
             padding: 12px 20px;
             font-size: 1em;
             border: 1px solid #ccc;
-            border-radius: 4px; /* Rend le champ rectangulaire */
+            border-radius: 4px;
             background-color: #f9f9f9;
             color: #333333;
             transition: all 0.3s ease;
@@ -100,6 +103,13 @@
             word-break: break-word;
             display: block;
         }
+        .ref-block {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 5px;
+        }
         .footer-signature {
             position: fixed;
             bottom: 20px;
@@ -110,7 +120,7 @@
             text-align: right;
             line-height: 1.3;
         }
-        #copyButton {
+        .copy-button {
             padding: 12px 25px;
             font-size: 1em;
             cursor: pointer;
@@ -122,9 +132,18 @@
             box-shadow: 0 4px 10px rgba(0, 120, 212, 0.4);
             margin-top: 20px;
         }
-        #copyButton:hover {
+        .copy-button:hover {
             background-color: #005a9c;
             transform: translateY(-2px);
+        }
+        .final-message {
+            margin-top: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+        #notFound {
+            color: red;
+            display: none;
         }
         @media (max-width: 768px) {
             .product-image {
@@ -142,10 +161,14 @@
         <a href="https://www.makita.fr/">
             <img src="https://www.makita.fr/data/pam/public/makita_logo3.png" alt="Logo Makita" class="logo">
         </a>
-        <h1 class="main-title">Caractéristiques de nos débroussailleuses Makita / Dolmar</h1>
+        <h1 class="main-title">Caractéristiques de nos débroussailleuses et tronçonneuses Makita / Dolmar</h1>
     </div>
 
+    <img src="https://fi.makitamedia.com/images//3_Makita/301_machines/3011_a_GS1/30120_JPG_zoom/UC002G_C8L0.jpg" alt="Makita Tronçonneuse" style="max-width: 150px; margin-bottom: 20px;">
     <img src="https://fi.makitamedia.com/images//3_Makita/301_machines/3011_a_GS1/30115_JPG_web/DUR368AZX3_C2R0.jpg" alt="Débroussailleuse Makita" class="product-image">
+
+    <h2 style="margin-top: 40px;">Caractéristiques débroussailleuses</h2>
+    <hr>
 
     <div class="search-section">
         <p class="search-label">Modèle de débroussailleuse / multi outil débroussailleuse :</p>
@@ -198,16 +221,50 @@
                 <span class="field-value" id="carterLameValue"></span>
             </div>
         </div>
-        <button id="copyButton">Copier toutes les caractéristiques machines</button>
+        <button id="copyButton" class="copy-button">Copier toutes les caractéristiques débroussailleuse</button>
     </div>
+
+    <h2 style="margin-top: 40px;">Caractéristiques guides et chaînes</h2>
+    <hr>
     
+    <div class="search-section">
+        <p class="search-label">Modèle EXACT de la tronçonneuse :</p>
+        <div class="search-container">
+            <input type="text" id="chainsawRef" class="search-input" placeholder="Ex: DUC254Z001" list="refList">
+            <datalist id="refList"></datalist>
+        </div>
+    </div>
+
+    <div id="chainsawResults" class="results-container" style="display: none;">
+        <div class="results-block">
+            <div class="field">
+                <span class="field-label">Spécification technique:</span>
+                <span class="field-value" id="ref1">-</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Référence du pignon :</span>
+                <span class="field-value" id="ref2">-</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Référence de la chaîne :</span>
+                <span class="field-value" id="ref3">-</span>
+            </div>
+            <div class="field">
+                <span class="field-label">Référence du guide :</span>
+                <span class="field-value" id="ref4">-</span>
+            </div>
+        </div>
+        <button id="copyChainsawButton" class="copy-button">Tout copier</button>
+        <p id="notFound" style="color: red; display: none;">Référence non trouvée 😕</p>
+    </div>
+
     <div class="footer-signature">
         Le support Technique Makita<br>
         V2.23
     </div>
 
     <script>
-        const data = [
+        const brushCutterData = [
             {"Famille": "À batterie 36 V", "Machine": "AL3630", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "A-90124", "Descriptif tête": "Tap et Go 2 fils Rond", "Diamètre de coupe fil": "Ø300mm/Ø2,7mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
             {"Famille": "À batterie 36 V", "Machine": "AL3630LGE", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "A-90124", "Descriptif tête": "Tap et Go 2 fils Rond", "Diamètre de coupe fil": "Ø300mm/Ø2,7mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
             {"Famille": "LXT - 18 V", "Machine": "AT1826", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
@@ -229,6 +286,81 @@
             {"Famille": "À batterie 36 V", "Machine": "AT3623LGE", "Filetage tête": "M10 x 1,25 G", "Référence tête à fil(s)": "Non de série", "Descriptif tête": "Non de série", "Diamètre de coupe fil": "Non de série", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "D-66008 Ø230mm", "Carter lame": "enlever extension fil 140583-9"}
         ];
 
+        const chainsawData = {
+            "DUC254Z001": ["25cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T89-0", "191T85-8"],
+            "5016B": ["40cm 91PX pas 3/8\" gauge 1,3mm", "221514-8", "191H12-3", "168248-1"],
+            "DUC254Z": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "DUC254RT": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "DUC254RF": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "DUC254T002": ["25cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T89-0", "191T85-8"],
+            "DUC254T003": ["25cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T89-0", "191T85-8"],
+            "ME246-4": ["255mm pas 3/8\" gauge 1,3mm", "XTM0000014", "196725-3", "191G11-9"],
+            "AS1812LG3": ["255mm 25AP pas 1/4\" gauge 1,3mm", "221527-9", "191G95-7", "158479-0"],
+            "AS1925": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "AS1925Z": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "AS1925RT2": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "AS1925RF": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "AS1925CRT2": ["25cm 90PX pas 3/8\" gauge 1,1mm", "199063-2", "191H00-0", "191G14-3"],
+            "AS1925CZ": ["25cm 25AP pas 1/4\" gauge 1,3mm", "198259-2", "191G96-5", "168395-8"],
+            "DUC254C": ["25cm 25AP pas 1/4\" gauge 1,3mm", "198259-2", "191G96-5", "1911A1-3"],
+            "EY401MP": ["25cm 91VXL 3/8\"LP gauge 1,3mm", "XTM0000014", "191H20-4", "191G11-9"],
+            "196101-1": ["25cm 91VXL 3/8\"LP gauge 1,3mm", "XTM0000014", "191H20-4", "191G11-9"],
+            "PS-CS1": ["25cm 91VXL 3/8\"LP gauge 1,3mm", "XTM0000014", "196725-3", "191G11-9"],
+            "199930-1": ["25cm 91VXL 3/8\"LP gauge 1,3mm", "XTM0000014", "196725-3", "191G11-9"],
+            "EY403MP": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "226992-7", "191H01-8", "191G15-1"],
+            "191T38-7": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "226992-7", "191H01-8", "191G15-1"],
+            "AS3626": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS-3626": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS3626LGE": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS3626LGEA": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS-3626LGE": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS-3626LGEA": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS-3726": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "191G22-4"],
+            "AS3726": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "AS3835RF2": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "AS3835Z": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "AS3935Z": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "AS4030ZB": ["30cm 91PX pas 3/8\" gauge 1,3mm", "221464-7", "191H10-7", "191G23-2"],
+            "AS-4035ZB": ["35cm 91PX pas 3/8\" LP gauge 1,3mm", "221464-7", "191H11-5", "191G24-0"],
+            "DUC353RF2": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "DUC353Z": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "UC250DWBE": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "UC250DWBEP": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "UC250DZ": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC252PM2": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC252PM4": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC252RF2": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC252RM2": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC252Z": ["25cm 91PX pas 3/8\" gauge 1,3mm", "221526-1", "191H08-4", "168406-9"],
+            "DUC355Z": ["35cm 90PX pas 3/8\" gauge 1,1mm", "221464-7", "191H02-6", "191G16-9"],
+            "DUC306PT2B": ["30cm 91PX pas 3/8\" gauge 1,3mm", "221464-7", "191H10-7", "191G23-2"],
+            "DUC306RF2": ["30cm 91PX pas 3/8\" gauge 1,3mm", "221464-7", "191H10-7", "191G23-2"],
+            "DUC306ZB": ["30cm 91PX pas 3/8\" gauge 1,3mm", "221464-7", "191H10-7", "191G23-2"],
+            "DUC306T001": ["30cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T90-5", "191T86-6"],
+            "DUC306Z001": ["30cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T90-5", "191T86-6"],
+            "DUC356PT2B": ["35cm 91PX pas 3/8\" LP gauge 1,3mm", "221464-7", "191H11-5", "191G24-0"],
+            "DUC356ZB": ["35cm 91PX pas 3/8\" LP gauge 1,3mm", "221464-7", "191H11-5", "191G24-0"],
+            "DUC356T001": ["35cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T91-3", "191T87-4"],
+            "DUC356Z001": ["35cm 80TXL pas 0,325\" gauge 1,1mm", "1911W5-9", "191T91-3", "191T87-4"],
+            "DUC302PM4": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H01-8", "191G15-1"],
+            "DUC302PT4": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H01-8", "191G15-1"],
+            "DUC302RF2": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H01-8", "191G15-1"],
+            "DUC302Z": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H01-8", "191G15-1"],
+            "ES34TLC": ["30cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H01-8", "191G15-1"],
+            "ES39TLC": ["35cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H02-6", "191G16-9"],
+            "ES43TLC": ["40cm 90PX pas 3/8\"LP gauge 1,1mm", "221526-1", "191H03-4", "191G17-7"],
+            "ES2136TLC": ["35cm 91PX pas 3/8\" gauge 1,3mm", "123886-6", "191H11-5", "191G24-0"],
+            "ES2141KTLC": ["40cm 91PX pas 3/8\" gauge 1,3mm", "123886-6", "191H12-3", "191G25-8"],
+            "ES152A": ["30cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H10-7", "191G23-2 jusqu'en 2003, puis 412030061"],
+            "ES162A": ["35cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H11-5", "191G24-0 jusqu'en 2003, puis 412035061"],
+            "ES172A": ["40cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H12-3", "191G25-8 jusqu'en 2003, puis 412040061"],
+            "ES182A": ["45cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H13-1", "191G26-6 jusqu'en 2003, puis 412045061"],
+            "ES2035A": ["35cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H11-5", "191G24-0 jusqu'en 2003, puis 412035061"],
+            "ES2040A": ["40cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H12-3", "191G25-8 jusqu'en 2003, puis 412040061"],
+            "ES2045A": ["45cm 91PX pas 3/8\" gauge 1,3mm", "Fin de série", "191H13-1", "191G26-6 jusqu'en 2003, puis 412045061"]
+        };
+
+        // Brush cutter section
         const modelSearch = document.getElementById('modelSearch');
         const datalist = document.getElementById('models');
         const resultsContainer = document.getElementById('resultsContainer');
@@ -250,7 +382,7 @@
         modelSearch.addEventListener('input', function() {
             const query = this.value.toUpperCase();
             datalist.innerHTML = '';
-            const filteredData = data.filter(item => item.Machine.toUpperCase().startsWith(query));
+            const filteredData = brushCutterData.filter(item => item.Machine.toUpperCase().startsWith(query));
             filteredData.forEach(item => {
                 const option = document.createElement('option');
                 option.value = item.Machine;
@@ -260,7 +392,7 @@
 
         modelSearch.addEventListener('change', function() {
             const selectedModel = this.value;
-            const item = data.find(d => d.Machine === selectedModel);
+            const item = brushCutterData.find(d => d.Machine === selectedModel);
 
             if (item) {
                 for (const [id, key] of Object.entries(fields)) {
@@ -277,7 +409,7 @@
 
         modelSearch.addEventListener('blur', function() {
             setTimeout(() => {
-                if (this.value && data.find(d => d.Machine === this.value)) {
+                if (this.value && brushCutterData.find(d => d.Machine === this.value)) {
                     datalist.innerHTML = '';
                 }
             }, 100);
@@ -291,6 +423,64 @@
             }
             navigator.clipboard.writeText(textToCopy).then(() => {
                 alert('Toutes les caractéristiques ont été copiées dans le presse-papiers !');
+            }).catch(err => {
+                console.error('Erreur lors de la copie :', err);
+                alert('Impossible de copier. Veuillez réessayer.');
+            });
+        });
+
+        // Chainsaw section
+        const chainsawRefInput = document.getElementById('chainsawRef');
+        const chainsawDatalist = document.getElementById('refList');
+        const chainsawResultsContainer = document.getElementById('chainsawResults');
+        const notFound = document.getElementById('notFound');
+
+        chainsawRefInput.addEventListener('input', function() {
+            const input = this.value.trim().toUpperCase();
+            chainsawDatalist.innerHTML = '';
+            const keys = Object.keys(chainsawData);
+            const filteredKeys = keys.filter(key => key.toUpperCase().startsWith(input));
+            filteredKeys.forEach(key => {
+                const option = document.createElement('option');
+                option.value = key;
+                chainsawDatalist.appendChild(option);
+            });
+        });
+
+        chainsawRefInput.addEventListener('change', function() {
+            const selectedModel = this.value.trim().toUpperCase();
+            const data = chainsawData[selectedModel];
+            if (data) {
+                document.getElementById("ref1").textContent = data[0];
+                document.getElementById("ref2").textContent = data[1];
+                document.getElementById("ref3").textContent = data[2];
+                document.getElementById("ref4").textContent = data[3];
+                notFound.style.display = "none";
+                chainsawResultsContainer.style.display = "block";
+                this.blur();
+            } else {
+                notFound.style.display = "block";
+                chainsawResultsContainer.style.display = "none";
+                ["ref1", "ref2", "ref3", "ref4"].forEach(id => document.getElementById(id).textContent = "-");
+            }
+            chainsawDatalist.innerHTML = '';
+        });
+
+        chainsawRefInput.addEventListener('blur', function() {
+            setTimeout(() => {
+                if (this.value && chainsawData[this.value.trim().toUpperCase()]) {
+                    chainsawDatalist.innerHTML = '';
+                }
+            }, 100);
+        });
+
+        document.getElementById('copyChainsawButton').addEventListener('click', function() {
+            const fields = ["ref1", "ref2", "ref3", "ref4"];
+            const labels = ["Spécification technique", "Référence du pignon", "Référence de la chaîne", "Référence du guide"];
+            const allText = fields.map((id, i) => `${labels[i]} : ${document.getElementById(id).textContent}`).join('\n');
+            
+            navigator.clipboard.writeText(allText).then(() => {
+                alert('Toutes les références ont été copiées dans le presse-papiers !');
             }).catch(err => {
                 console.error('Erreur lors de la copie :', err);
                 alert('Impossible de copier. Veuillez réessayer.');
