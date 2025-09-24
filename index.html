@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caractéristiques débroussailleuses Makita / Dolmar</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            background-color: #ffffff;
+            color: #333333;
+            padding: 20px;
+            position: relative;
+            min-height: 100vh;
+        }
+        .header {
+            padding: 20px 0;
+        }
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+        .main-title {
+            font-size: 2em;
+            font-weight: bold;
+            color: #000000;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .product-image {
+            max-width: 11.11%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        .search-section {
+            margin: 40px 0;
+        }
+        .search-container {
+            position: relative;
+            display: inline-block;
+            width: 80%;
+            max-width: 500px;
+        }
+        .search-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 4px; /* Rend le champ rectangulaire */
+            background-color: #f9f9f9;
+            color: #333333;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: #0078d4;
+            box-shadow: 0 0 10px rgba(0, 120, 212, 0.3);
+        }
+        .results-container {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .results-block {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .field {
+            margin-bottom: 15px;
+        }
+        .field-label {
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #666;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .field-value {
+            font-size: 1.1em;
+            color: #0078d4;
+            word-break: break-word;
+            display: block;
+        }
+        .footer-signature {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+            text-align: right;
+            line-height: 1.3;
+        }
+        #copyButton {
+            padding: 12px 25px;
+            font-size: 1em;
+            cursor: pointer;
+            background-color: #0078d4;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0, 120, 212, 0.4);
+            margin-top: 20px;
+        }
+        #copyButton:hover {
+            background-color: #005a9c;
+            transform: translateY(-2px);
+        }
+        @media (max-width: 768px) {
+            .product-image {
+                max-width: 80%;
+            }
+            .results-block {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="https://www.makita.fr/">
+            <img src="https://www.makita.fr/data/pam/public/makita_logo3.png" alt="Logo Makita" class="logo">
+        </a>
+        <h1 class="main-title">Caractéristiques de nos débroussailleuses Makita / Dolmar</h1>
+    </div>
+
+    <img src="https://fi.makitamedia.com/images//3_Makita/301_machines/3011_a_GS1/30115_JPG_web/DUR368AZX3_C2R0.jpg" alt="Débroussailleuse Makita" class="product-image">
+
+    <div class="search-section">
+        <p class="search-label">Modèle de débroussailleuse / multi outil débroussailleuse :</p>
+        <div class="search-container">
+            <input type="text" id="modelSearch" class="search-input" placeholder="Rechercher un modèle..." list="models">
+            <datalist id="models"></datalist>
+        </div>
+    </div>
+    
+    <div id="resultsContainer" class="results-container" style="display: none;">
+        <div class="results-block">
+            <div class="field">
+                <span class="field-label">Famille :</span>
+                <span class="field-value" id="familleValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Machine :</span>
+                <span class="field-value" id="machineValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Filetage tête :</span>
+                <span class="field-value" id="filetageValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Référence tête à fil(s) :</span>
+                <span class="field-value" id="referenceValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Descriptif tête :</span>
+                <span class="field-value" id="descriptifValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Diamètre de coupe fil :</span>
+                <span class="field-value" id="diametreCoupeValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Couteau plastique :</span>
+                <span class="field-value" id="couteauPlastiqueValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Carter couteau plastique :</span>
+                <span class="field-value" id="carterCouteauValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Lame :</span>
+                <span class="field-value" id="lameValue"></span>
+            </div>
+            <div class="field">
+                <span class="field-label">Carter lame :</span>
+                <span class="field-value" id="carterLameValue"></span>
+            </div>
+        </div>
+        <button id="copyButton">Copier toutes les caractéristiques machines</button>
+    </div>
+    
+    <div class="footer-signature">
+        Le support Technique Makita<br>
+        V2.23
+    </div>
+
+    <script>
+        const data = [
+            {"Famille": "À batterie 36 V", "Machine": "AL3630", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "A-90124", "Descriptif tête": "Tap et Go 2 fils Rond", "Diamètre de coupe fil": "Ø300mm/Ø2,7mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "À batterie 36 V", "Machine": "AL3630LGE", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "A-90124", "Descriptif tête": "Tap et Go 2 fils Rond", "Diamètre de coupe fil": "Ø300mm/Ø2,7mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1826", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1826H", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1826LGH", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1827", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1827H", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1827LGH", "Filetage tête": "Pince", "Référence tête à fil(s)": "195859-9", "Descriptif tête": "(1 fil)", "Diamètre de coupe fil": "Ø260mm/Ø1,65mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1831C", "Filetage tête": "M8 x 1,25 G", "Référence tête à fil(s)": "A-89121", "Descriptif tête": "Tap & Go 2 fils", "Diamètre de coupe fil": "Ø300mm/Ø2,4mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1831CL", "Filetage tête": "M8 x 1,25 G", "Référence tête à fil(s)": "A-89121", "Descriptif tête": "Tap & Go 2 fils", "Diamètre de coupe fil": "Ø300mm/Ø2,4mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1831U", "Filetage tête": "M8 x 1,25 G", "Référence tête à fil(s)": "A-89121", "Descriptif tête": "Tap & Go 2 fils", "Diamètre de coupe fil": "Ø300mm/Ø2,4mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1831UL", "Filetage tête": "M8 x 1,25 G", "Référence tête à fil(s)": "A-89121", "Descriptif tête": "Tap & Go 2 fils", "Diamètre de coupe fil": "Ø300mm/Ø2,4mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1832C", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "198971-4", "Descriptif tête": "TETE 2 FIL TAP&GO (FIL TREFLE)", "Diamètre de coupe fil": "Ø300mm/Ø2mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1832CL", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "198971-4", "Descriptif tête": "TETE 2 FIL TAP&GO (FIL TREFLE)", "Diamètre de coupe fil": "Ø300mm/Ø2mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1832CL2", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "198971-4", "Descriptif tête": "TETE 2 FIL TAP&GO (FIL TREFLE)", "Diamètre de coupe fil": "Ø300mm/Ø2mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "LXT - 18 V", "Machine": "AT1832CZ", "Filetage tête": "M8 x 1,25 D", "Référence tête à fil(s)": "198971-4", "Descriptif tête": "TETE 2 FIL TAP&GO (FIL TREFLE)", "Diamètre de coupe fil": "Ø300mm/Ø2mm", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "non compatible", "Carter lame": "non compatible"},
+            {"Famille": "À batterie 36 V", "Machine": "AT3623", "Filetage tête": "M10 x 1,25 G", "Référence tête à fil(s)": "Non de série", "Descriptif tête": "Non de série", "Diamètre de coupe fil": "Non de série", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "D-66008 Ø230mm", "Carter lame": "enlever extension fil 140583-9"},
+            {"Famille": "À batterie 36 V", "Machine": "AT3623LG", "Filetage tête": "M10 x 1,25 G", "Référence tête à fil(s)": "Non de série", "Descriptif tête": "Non de série", "Diamètre de coupe fil": "Non de série", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "D-66008 Ø230mm", "Carter lame": "enlever extension fil 140583-9"},
+            {"Famille": "À batterie 36 V", "Machine": "AT3623LGE", "Filetage tête": "M10 x 1,25 G", "Référence tête à fil(s)": "Non de série", "Descriptif tête": "Non de série", "Diamètre de coupe fil": "Non de série", "Couteau plastique": "non compatible", "Carter couteau plastique": "non compatible", "Lame": "D-66008 Ø230mm", "Carter lame": "enlever extension fil 140583-9"}
+        ];
+
+        const modelSearch = document.getElementById('modelSearch');
+        const datalist = document.getElementById('models');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const copyButton = document.getElementById('copyButton');
+        
+        const fields = {
+            'familleValue': 'Famille',
+            'machineValue': 'Machine',
+            'filetageValue': 'Filetage tête',
+            'referenceValue': 'Référence tête à fil(s)',
+            'descriptifValue': 'Descriptif tête',
+            'diametreCoupeValue': 'Diamètre de coupe fil',
+            'couteauPlastiqueValue': 'Couteau plastique',
+            'carterCouteauValue': 'Carter couteau plastique',
+            'lameValue': 'Lame',
+            'carterLameValue': 'Carter lame'
+        };
+
+        modelSearch.addEventListener('input', function() {
+            const query = this.value.toUpperCase();
+            datalist.innerHTML = '';
+            const filteredData = data.filter(item => item.Machine.toUpperCase().startsWith(query));
+            filteredData.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.Machine;
+                datalist.appendChild(option);
+            });
+        });
+
+        modelSearch.addEventListener('change', function() {
+            const selectedModel = this.value;
+            const item = data.find(d => d.Machine === selectedModel);
+
+            if (item) {
+                for (const [id, key] of Object.entries(fields)) {
+                    document.getElementById(id).textContent = item[key] || 'non disponible';
+                }
+                resultsContainer.style.display = 'block';
+                
+                datalist.innerHTML = '';
+                this.blur();
+            } else {
+                resultsContainer.style.display = 'none';
+            }
+        });
+
+        modelSearch.addEventListener('blur', function() {
+            setTimeout(() => {
+                if (this.value && data.find(d => d.Machine === this.value)) {
+                    datalist.innerHTML = '';
+                }
+            }, 100);
+        });
+
+        copyButton.addEventListener('click', function() {
+            let textToCopy = "Caractéristiques de la machine :\n\n";
+            for (const [id, label] of Object.entries(fields)) {
+                const value = document.getElementById(id).textContent;
+                textToCopy += `${label} : ${value}\n`;
+            }
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                alert('Toutes les caractéristiques ont été copiées dans le presse-papiers !');
+            }).catch(err => {
+                console.error('Erreur lors de la copie :', err);
+                alert('Impossible de copier. Veuillez réessayer.');
+            });
+        });
+    </script>
+
+</body>
+</html>
